@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sphere</title>
+    <style>
+        html,
+        body {
+            margin: 0px;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script type="text/javascript">
+        let c = document.getElementById("canvas");
+        let x = c.getContext("2d");
+        let t = 0;
+
+        function draw() {
+            requestAnimationFrame(draw);
+            let cx = 960;
+            let cy = 540;
+            x.fillRect(0, 0, 1920, 1080);
+            for (let i = 99; i >= 0; i--) {
+                let p = i + t;
+                let q = i / 31;
+                let z = 3 + Math.cos(p) * Math.sin(q);
+                let X = Math.sin(p) * Math.sin(q);
+                let s = 69 / z;
+
+                let sx = cx + (1 / z) * X * cx;
+                let sy = cy + (Math.cos(q) / z) * cx;
+
+                // Setting color for sphere
+                // x.fillStyle = 'rgba(56,255,25,0.7)';
+
+
+
+                x.clearRect(sx, sy, s, s);
+            }
+            t += 0.01;
+        }
+
+        c.width = 1920;
+        c.height = 1080;
+        draw();
+    </script>
+</body>
+</html>
